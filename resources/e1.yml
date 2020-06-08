@@ -1,0 +1,9 @@
+App:
+  profile: e2
+  port: 7000
+Postgres:
+  host: localhost
+  port: 5421
+  username: pokeAdmin
+  password: somesecretpassword
+  database: pokeman
