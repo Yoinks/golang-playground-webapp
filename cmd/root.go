@@ -36,7 +36,7 @@ func initConfig(cmd *cobra.Command) {
 
 	viper.SetConfigName(viper.GetString("app.profile"))
 	viper.SetConfigType("yml")
-	viper.AddConfigPath("resources")
+	viper.AddConfigPath("config")
 
 	if err := viper.ReadInConfig(); err != nil {
 		log.Fatalf("Error Reading Config File, %s", err)
