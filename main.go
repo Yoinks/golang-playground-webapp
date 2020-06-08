@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	"github.com/pokeman-service/cmd"
 )
 
@@ -8,7 +10,7 @@ func main() {
 }
 
 func init() {
-	cmd.Execute()
-	// app.InitWebServer()
-
+	if err := cmd.RootCommand().Execute(); err != nil {
+		log.Fatal(err)
+	}
 }

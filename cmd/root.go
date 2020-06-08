@@ -1,9 +1,9 @@
 package cmd
 
 import (
-	"fmt"
 	"log"
-	"os"
+
+	"github.com/pokeman-service/api"
 
 	"github.com/pokeman-service/model"
 
@@ -11,35 +11,26 @@ import (
 	"github.com/spf13/viper"
 )
 
-var (
-	rootCmd = &cobra.Command{
+func RootCommand() *cobra.Command {
+	rootCmd := cobra.Command{
 		Use: "example",
+		Run: run,
 	}
-)
 
-//Execute executes the root command
-func Execute() error {
-	return rootCmd.Execute()
-}
-
-func init() {
-	cobra.OnInitialize(initConfig)
-}
-
-func er(msg interface{}) {
-	fmt.Println("Error:", msg)
-	os.Exit(1)
-}
-
-func initCobraConfigFlags() {
-
-}
-
-func initConfig() {
 	rootCmd.Flags().IntP("app.port", "p", 8080, "Port which the http server runs on")
 	rootCmd.Flags().StringP("app.profile", "e", "e1", "Config Env Profile")
 
-	if err := viper.BindPFlags(rootCmd.Flags()); err != nil {
+	return &rootCmd
+}
+
+func run(cmd *cobra.Command, args []string) {
+	initConfig(cmd)
+	api.InitWebServer()
+}
+
+func initConfig(cmd *cobra.Command) {
+
+	if err := viper.BindPFlags(cmd.Flags()); err != nil {
 		log.Fatalf("Failed to Bind Command Line Flags, %s", err)
 	}
 

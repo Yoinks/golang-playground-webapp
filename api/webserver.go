@@ -1,4 +1,4 @@
-package app
+package api
 
 import (
 	"net/http"
@@ -7,7 +7,7 @@ import (
 )
 
 //InitRouter Initializes the listening for url paths
-func InitRouter() *mux.Router {
+func initRouter() *mux.Router {
 	r := mux.NewRouter()
 	r.HandleFunc("/pokemans", GetPokemans).Methods("GET")
 
@@ -17,9 +17,5 @@ func InitRouter() *mux.Router {
 
 //InitWebServer Initializes the webserver listener and routes
 func InitWebServer() {
-	http.ListenAndServe(":8080", InitRouter())
-}
-
-func InitConfig() {
-
+	http.ListenAndServe(":8080", initRouter())
 }
